@@ -1,0 +1,46 @@
+# docker first run
+
+..based on https://docker-curriculum.com/
+
+$ sudo groupadd docker
+$ sudo usermod -aG docker $USER
+
+# docker containers
+
+$ docker run hello-world
+$ docker pull busybox
+$ docker images
+$ docker run busybox
+                     |- echo "hello from busybox"
+
+$ docker ps
+            |: -a
+
+$ docker run -it busybox sh
+             |           |-> container runs shell
+             |-> -it: interactive tty
+
+$ docker container prune
+|-> delete exited containers
+
+$ docker rmi
+|-> delete unneeded images
+
+$ docker run | mlkr4/catnip
+             |: --rm #removes container on exit
+             |: -d #detach terminal
+             |: -P #publish all exposed ports randomly
+             |: -p #assign ports as <machine>:<container>
+             |: --name katnyp #name a container "katnyp"
+
+$ docker port katnyp
+|-> list ports
+
+$ docker stop katnyp
+
+# docker images
+
+$ docker images
+
+$ docker pull ubuntu:18.04
+
