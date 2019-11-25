@@ -28,7 +28,7 @@ $ docker rmi
 
 $ docker run | mlkr4/catnip
              |: --rm #removes container on exit
-             |: -d #detach terminal
+             |: -d #detach terminal and print id
              |: -P #publish all exposed ports randomly
              |: -p #assign ports as <machine>:<container>
              |: --name katnyp #name a container "katnyp"
@@ -38,9 +38,38 @@ $ docker port katnyp
 
 $ docker stop katnyp
 
+$ docker push mlkr4/catnip
+
 # docker images
 
 $ docker images
 
 $ docker pull ubuntu:18.04
+
+$ docker search elasticsearch
+
+$ docker pull docker.elastic.co/elasticsearch/elasticsearch:6.3.2
+
+$ docker run -d --name es -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:6.3.2
+             +-> detach and print id   |            |
+                +-> specified name "es"|            |
+                          +------------+-> specified ports
+                                                    +-> set env. variables "discovery.type=single-node" for the container
+
+$ docker network ls
+
+$ docker network inspect bridge
+
+$ docker network create foodtrucks-net
+
+$ docker run -d --net foodtrucks-net -p 5000:5000 --name foodtrucks-web mlkr4/foodtrucks-web
+                +-> utilize newly created network
+
+$ docker-compose up -d
+|                   +-> in detached mode
++-> runs docker-compose in current directory
+
+$ docker-compose down -v
+|                     +-> delete everything running
++-> stops docker-compose in current directory
 
