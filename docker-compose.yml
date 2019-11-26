@@ -1,0 +1,31 @@
+version: '3.4'
+
+services:
+  bonsai-file:
+    build: ./bonsai-file
+    container_name: bonsai-file
+    environment:
+      TZ: 'Europe/Prague'
+    networks:
+      - bonsai-network
+    ports:
+      - "137:137/udp"
+      - "138:138/udp"
+      - "139:139/tcp"
+      - "445:445/tcp"
+    read_only: true
+    tmpfs:
+      - /tmp
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./fs/etc/samba:/etc/samba
+      - ./fs/var/lib/samba:/var/lib/samba
+      - ./fs/etc/passwd:/etc/passwd
+      - ./fs/etc/shadow:/etc/shadow
+      # - /share1:/share1
+      # - /share2:/share2:ro  
+
+networks:
+  bonsai-network:
